@@ -29,7 +29,8 @@ public class AppRunner {
 				System.out.println("Unexpected Error occured while parsing Input, make sure valid value is entered");
 			}
 
-			exitStatus = parseMonitorInput(jo) ? 1 : 0;
+			exitStatus = parseMonitorInput(jo) ? 0 : 1;
+			System.out.println(" The exit status for patient is : "+exitStatus);
 	
 			startApp = s.nextBoolean();
 			
@@ -42,6 +43,7 @@ public class AppRunner {
 		// { "patient id": "TRJIW432", "SPO2": 96, "pulse rate": 75, "temperature": . }
 		// { "patient id": "TRJIW432", "SPO2": 96, "pulse rate": 75, "temperature": @ }
 		// { "patient id": "TRJIW432", "SPO2": 96, "pulse rate": -, "temperature": 98.6 }
+		// { "patient id": "TRJIW432", "SPO2": 96, "puLse rate": -, "Temperature": 98.6 }
 
 	}
 	
@@ -84,7 +86,8 @@ public class AppRunner {
 
 		if(validateMonitorInput(patientID, pulseRate, spo2, temperature)){ //
 			Patient patientObj = new Patient(patientID, temperature, spo2, pulseRate);
-			return true;
+			boolean result = patientObj.Checker();
+			return result;
 		}	
 		else {
 			return false;
